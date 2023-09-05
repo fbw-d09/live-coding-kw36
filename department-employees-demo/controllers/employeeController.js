@@ -22,6 +22,27 @@ export const getAllEmployees = async(req, res) => {
     }
 };
 
+/* 
+In unserem employee-Schema haben wir mit "ref" einen Bezug zu unserem department-Schema
+hergestellt. Wenn wir uns jetzt per "findById"-Methode einen Employee anzeigen lassen
+sehen wir im Feld "department", welches Department diesem Employee zugewiesen ist.
+Problem dabei, wir sehen nur die ObjectId von diesem Department. 
+
+Um uns auch die dazugehörigen Felder anzeigen zu lassen, können wir die "populate"-Methode
+benutzen. Wir können populate ein Objekt übergeben, wobei "path" der Name des Feldes 
+sein muss, in dem wir die Referenzierung vorgenommen haben. Mit "select" können wir
+angeben, welche Felder aus Department wir angezeigt bekommen wollen. Lassen wir select
+weg, werden alle Felder zurückgegeben.
+Alternativ können wir auch die Kurzschreibweise nutzen. Populate bekommt dann zwei
+Argumente als String. Zuerst den Namen (analog zu "path"), danach die Felder, die
+wir uns anzeigen lassen wollen (getrennt durch Leerzeichen). Möchten wir Felder wie
+die ObjectId explizit ausschließen, dann müssen wir ein Minus (-) davorschreiben.
+
+Wir können "select" auch benutzen, um die Anzeige der Felder für die Employees zu
+begrenzen, dazu können wir select an die populate-Methode anhängen:
+populate("department", "name").select("name email").
+*/
+
 export const getOneEmployee = async(req, res) =>{
     const {id} = req.params;
     try {

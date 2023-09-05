@@ -66,4 +66,18 @@ try {
     process.exit(1);
 };
 
+/* 
+Wir haben uns eine Seed-Datei erstellt um unsere Datenbank flexibel und schnell
+befüllen zu können. process.argv benutzen wir dabei um bereits beim Aufrufen unseres
+Skripts (mit npm run seed) festlegen zu können, a) ob wir bestehene Einträge aus der
+Datenbank löschen wollen und b) wie viele neue Employees wir generieren wollen.
+Beispiel: Wir wollen die Datenbank löschen und 10 neue Employees erzeugen, dann
+starten wir unser Skript mit: npm run seed delete 10
+Wollen wir lediglich neue Daten hinzufügen könnten wir starten mit:
+npm run seed 10
 
+Zum Befüllen der Daten nutzen wir das npm-Paket faker-js. Damit können wir 
+pseudorealistische Daten generieren. Installiert haben wir das Paket mit:
+npm i @faker-js/faker. Zusätzlich haben wir fakerDE importiert (aus demselben Paket),
+das hat uns erlaubt länderspezifische Daten zu erzeugen (hier: nur deutsche Städtenamen).
+*/
