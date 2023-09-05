@@ -10,6 +10,16 @@ export const createEmployee = async(req, res) => {
         console.log({error});
         res.status(500).json({msg:"Server error!"});
     }
+};
+
+export const getAllEmployees = async(req, res) => {
+    try {
+        const response = await Employee.find();
+        res.status(200).json(response);
+    } catch (error) {
+        console.log({error});
+        res.status(500).json({msg:"Server error!"});
+    }
 }
 
 export const deleteEmployees = async(req, res) => {
@@ -20,4 +30,4 @@ export const deleteEmployees = async(req, res) => {
         console.log({error});
         res.status(500).json({msg:"Server error!"});
     }
-}
+};
