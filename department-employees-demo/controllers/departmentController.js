@@ -21,7 +21,19 @@ export const getAllDepartments = async(req, res) => {
         console.log({error});
         res.status(500).json({msg:"Server error!"});
     }
+};
+
+export const getOneDepartment = async(req, res) => {
+    const {id} = req.params;
+    try {
+        const response = await Department.findById(id);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log({error});
+        res.status(500).json({msg:"Server error!"});
+    }
 }
+
 
 export const deleteDepartments = async(req, res) => {
     try {
