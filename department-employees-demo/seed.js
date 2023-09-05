@@ -23,6 +23,7 @@ const generateDepartments = () => {
         const location = fakerDE.location.city();
         departments.push(new Department({name, location}))
     });
+    return departments;
 };
 
 const generateEmployees = (departments, amount=10)=>{
@@ -33,7 +34,7 @@ const generateEmployees = (departments, amount=10)=>{
         const email = faker.internet.email();
         const salary = faker.number.int({min:25000, max:90000});
         const hireDate = faker.date.past({years:30});
-        const randomDepartment = departments[faker.number.int({min:0, max:randomDepartment.length-1})]
+        const randomDepartment = departments[faker.number.int({min:0, max:4})]
 
         employees.push(new Employee({name, email, salary, hireDate, department:randomDepartment}));
     };
@@ -41,15 +42,19 @@ const generateEmployees = (departments, amount=10)=>{
 };
 
 try {
-    const departments = generateDepartments();
-    await Department.insertMany(departments);
     if (!process.argv.includes("delete")){
+        const departments = generateDepartments();
+        await Department.insertMany(departments);
+
         const employees = generateEmployees(departments, process.argv[2]);
         await Employee.insertMany(employees);
     } else {
         await deleteDepartments();
         await deleteEmployees();
         console.log("All documents removed!");
+
+        const departments = generateDepartments();
+        await Department.insertMany(departments);
 
         const employees = generateEmployees(departments, process.argv[3]);
         await Employee.insertMany(employees);
