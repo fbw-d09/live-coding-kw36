@@ -57,7 +57,29 @@ export const getOneEmployee = async(req, res) =>{
         console.log({error});
         res.status(500).json({msg:"Server error!"});
     }
-}
+};
+
+export const updateOneEmployee = async(req, res) => {
+    try {
+        const response = await Employee.findByIdAndUpdate(req.params.id, req.body, {new:true});
+        // const response = await Employee.findByIdAndUpdate(req.params.id, req.body, {new:true, overwrite:true});
+        // const response = await Employee.findOneAndReplace({_id:req.params.id}, req.body, {new:true});
+        // const response = await Employee.updateOne({_id:req.params.id}, req.body);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log({error});
+        res.status(500).json({msg:"Server error!"});
+    }
+};
+
+export const deleteOneEmployee = async(req, res) => {
+    try {
+        await Employee.findByIdAndDelete(req.params.id);
+        res.status(200).json({msg:"Employee deleted!"});
+    } catch (error) {
+        
+    }
+};
 
 export const deleteEmployees = async(req, res) => {
     try {

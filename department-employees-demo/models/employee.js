@@ -24,7 +24,8 @@ const employeeSchema = new mongoose.Schema({
     hireDate: Date,
     department: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Department"
+        ref: "Department", 
+        required:true
     }
 });
 
